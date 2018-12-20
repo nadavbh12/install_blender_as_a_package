@@ -1,0 +1,37 @@
+diff --git a/build_files/build_environment/install_deps.sh b/build_files/build_environment/install_deps.sh
+index 6cd7254..175f8fc 100755
+--- a/build_files/build_environment/install_deps.sh
++++ b/build_files/build_environment/install_deps.sh
+@@ -296,13 +296,13 @@ PYTHON_VERSION="3.6.2"
+ PYTHON_VERSION_MIN="3.6"
+ PYTHON_FORCE_BUILD=false
+ PYTHON_FORCE_REBUILD=false
+-PYTHON_SKIP=false
++PYTHON_SKIP=true
+ 
+ NUMPY_VERSION="1.13.1"
+ NUMPY_VERSION_MIN="1.8"
+ NUMPY_FORCE_BUILD=false
+ NUMPY_FORCE_REBUILD=false
+-NUMPY_SKIP=false
++NUMPY_SKIP=true
+ 
+ BOOST_VERSION="1.60.0"
+ BOOST_VERSION_MIN="1.49"
+@@ -1092,7 +1092,7 @@ compile_Python() {
+ 
+     ./configure --prefix=$_inst --libdir=$_inst/lib --enable-ipv6 \
+         --enable-loadable-sqlite-extensions --with-dbmliborder=bdb \
+-        --with-computed-gotos --with-pymalloc
++        --with-computed-gotos --with-pymalloc --enable-shared
+ 
+     make -j$THREADS && make install
+     make clean
+@@ -1676,6 +1676,7 @@ compile_OIIO() {
+     cmake_d="$cmake_d -D BUILD_TESTING=OFF"
+     cmake_d="$cmake_d -D OIIO_BUILD_TESTS=OFF"
+     cmake_d="$cmake_d -D OIIO_BUILD_TOOLS=OFF"
++    cmake_d="$cmake_d -D USE_OPENCV=OFF"
+     cmake_d="$cmake_d -D TXT2MAN="
+     #cmake_d="$cmake_d -D CMAKE_EXPORT_COMPILE_COMMANDS=ON"
+     #cmake_d="$cmake_d -D CMAKE_VERBOSE_MAKEFILE=ON"
